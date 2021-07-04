@@ -1,0 +1,27 @@
+.header {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "main second"
+                         "main third";
+    place-items: center;
+    margin: 2rem 0;
+}
+
+h1 {
+    color: var(--dark-color);
+    font-size: 3rem;
+    text-align: center;
+    grid-area: second;
+}
+
+img {
+    height: 10rem;
+    grid-area: main;
+}
+
+h3 {
+    color: var(--light-color);
+    font-size: 1.3rem;
+    text-align: center;
+    grid-area: third;
+}
