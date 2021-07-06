@@ -1,0 +1,25 @@
+.updateTodo {
+    padding: 0.5rem;
+    font-size: 1rem;
+    display: grid;
+    grid-template-columns: 5.5fr 1.3fr 1.3fr;
+    gap: 1rem;
+    align-items: center;
+}
+
+.updateTodo button {
+    font-family: 'Poppins', sans-serif;
+    background: var(--second-color);
+    font-size: 0.8rem;
+    border: none;
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.updateTodo button:nth-child(3) {
+    background: var(--dark-color);
+    color: white;
+    border: none;
+}

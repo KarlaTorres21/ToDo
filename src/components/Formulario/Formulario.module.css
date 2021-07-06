@@ -16,7 +16,7 @@ input[type="text"] {
     width: 100%;
 }
 
-form button {
+form .buttonAdd {
     display: block;
     width: 80%;
     outline: none;

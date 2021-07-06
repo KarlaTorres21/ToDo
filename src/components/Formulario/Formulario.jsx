@@ -27,7 +27,7 @@ const Formulario = ( {setListTodos}) => {
                 onChange={handleAdd}
             />
             <div className={styles.containerButton}>
-                <button>Add</button>
+                <button className={styles.buttonAdd}>Add</button>
             </div>
         </form>
     )

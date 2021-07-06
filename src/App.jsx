@@ -1,33 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import styles from "./App.module.css"
 import Header from "./components/Header/Header"
 import Actions from "./components/Actions/Actions"
 import Formulario from "./components/Formulario/Formulario"
+import UpdateTodo from "./components/UpdateTodo/UpdateTodo"
 import Todo from "./components/Todo/Todo"
 
-const initialTodos = [
-    {
-        id: 0,
-        description: "Terminar de realizar ToDo",
-        completed: false
-    },
-    {
-        id: 1,
-        description: "Terminar de leer libro",
-        completed: false
-    },
-    {
-        id: 2,
-        description: "Resolver problema de C++",
-        completed: false
-    },
-    {
-        id: 3,
-        description: "Estudiar matemáticas",
-        completed: false
-    }
-]
+const initialTodos = JSON.parse(localStorage.getItem( "listTodos" ) || "[]")
+const filterInitialState = localStorage.getItem( "filterToDo" ) || "All"
 
 const FILTERS = {
     All: () => true,
@@ -38,7 +19,16 @@ const FILTERS = {
 const App = () => {
 
     const [listTodos, setListTodos] = useState(initialTodos)
-    const [filterToDo, setFilterToDo] = useState( "All" )
+    const [filterToDo, setFilterToDo] = useState( filterInitialState )
+    const [todoUpdate, setTodoUpdate] = useState("")
+
+    useEffect( () => {
+        localStorage.setItem( "listTodos", JSON.stringify(listTodos) )
+    }, [listTodos])
+
+    useEffect( () => {
+        localStorage.setItem( "filterToDo", filterToDo )
+    }, [filterToDo])
 
     const hadleDelete = id => {
         setListTodos( todos => todos.filter( todoItem => todoItem.id !== id ) )
@@ -59,7 +49,7 @@ const App = () => {
     }
 
     const handleUpdate = id => {
-        console.log(id)
+        setTodoUpdate( id )
     }
 
     return (
@@ -74,7 +64,16 @@ const App = () => {
             <section id={styles.todos}>
                 { listTodos.length > 0 ?
                     listTodos.filter( FILTERS[filterToDo] ).map( ({ id, description, completed }) => 
-                        <Todo 
+                        todoUpdate === id ? 
+                        <UpdateTodo 
+                            key={id}
+                            id={id}
+                            textTodo={description}
+                            listTodos={listTodos}
+                            setListTodos={setListTodos}
+                            setTodoUpdate={setTodoUpdate}
+                        />
+                        :<Todo 
                             key={id}
                             id={id}
                             description={description} 
